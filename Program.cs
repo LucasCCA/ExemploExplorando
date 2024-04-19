@@ -20,7 +20,7 @@ using Newtonsoft.Json;
 
 #endregion
 
-#region FormatandoNumeros
+#region FormatandoMoedas
 
 // CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("pt-BR");
 
