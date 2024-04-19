@@ -1,5 +1,6 @@
 ﻿using ExemploExplorando.Models;
 using System.Globalization;
+using Newtonsoft.Json;
 
 #region BodyExpression
 
@@ -240,9 +241,55 @@ using System.Globalization;
 
 #region OperadorTernario
 
-int numero = 10;
-bool par = numero % 2 == 0;
+// int numero = 10;
+// bool par = numero % 2 == 0;
 
-Console.WriteLine($"O número {numero} é {(par ? "par" : "ímpar")}");
+// Console.WriteLine($"O número {numero} é {(par ? "par" : "ímpar")}");
+
+#endregion
+
+#region Serializacao
+
+// Venda v1 = new Venda(1, "Material de escritório", 25.00M, DateTime.Now);
+
+// string serializado = JsonConvert.SerializeObject(v1, Formatting.Indented);
+// Console.WriteLine(serializado);
+
+// File.WriteAllText("Arquivos/vendas.json", serializado);
+
+// List<Venda> listaVendas = new List<Venda>();
+// Venda v2 = new Venda(2, "Licença de Software", 110.00M, DateTime.Now);
+
+// listaVendas.Add(v1);
+// listaVendas.Add(v2);
+
+// string colecaoSerializada = JsonConvert.SerializeObject(listaVendas, Formatting.Indented);
+// Console.WriteLine(colecaoSerializada);
+
+// File.WriteAllText("Arquivos/vendasColecao.json", colecaoSerializada);
+
+#endregion
+
+#region Deserializacao
+
+string conteudoArquivo = File.ReadAllText("Arquivos/vendasColecao.json");
+
+List<Venda> listaVenda = JsonConvert.DeserializeObject<List<Venda>>(conteudoArquivo);
+
+foreach (Venda venda in listaVenda)
+{
+    Console.WriteLine($"Id: {venda.Id}, Produto: {venda.Produto}, " +
+        $"Preço: {venda.Preco}, Data: {venda.DataVenda:dd/MM/yyyy HH:mm}");
+}
+
+string conteudoArquivo2 = File.ReadAllText("Arquivos/vendaNomeForaDaConvencao.json");
+
+List<Venda> listaVenda2 = JsonConvert.DeserializeObject<List<Venda>>(conteudoArquivo2);
+
+foreach (Venda venda in listaVenda2)
+{
+    Console.WriteLine($"Id: {venda.Id}, Produto: {venda.Produto}, " +
+        $"Preço: {venda.Preco}, Data: {venda.DataVenda:dd/MM/yyyy HH:mm}");
+}
 
 #endregion
